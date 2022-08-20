@@ -1,11 +1,9 @@
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
@@ -20,14 +18,15 @@ public class Consumer {
 
 		try {
 			Connection connection = connectionFactory.createConnection();
-			connection.setClientID("1");
+			connection.setClientID("1");		//moramo da znamo koji je ID subscriber-a
 			connection.start();
 
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-			Topic topic = session.createTopic("demo-topic");
+			Topic topic = session.createTopic("demo-topic"); //ako topic postoji nece ga kreirati ponovi
+			// DurableSubscriber nam omogucava da dobijamo poruke i u slucaju kada smo bili offline a zatim se prijavili (dobicemo naknadno poruke od topica tj Publishera)
 
-			MessageConsumer consumer = session.createDurableSubscriber(topic, "Consumer-1");
+			MessageConsumer consumer = session.createDurableSubscriber(topic, "Subscriber-1");		//dodedljujemo ime subscriber-u
 			consumer.setMessageListener(new MessageListener() {
 
 				public void onMessage(Message message) {
