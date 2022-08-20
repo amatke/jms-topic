@@ -27,7 +27,7 @@ public class Consumer {
 
 			Topic topic = session.createTopic("demo-topic");
 
-			MessageConsumer consumer = session.createDurableSubscriber(topic, "Consumer-1");
+			MessageConsumer consumer = session.createDurableSubscriber(topic, "Subscriber-1");
 			consumer.setMessageListener(new MessageListener() {
 
 				public void onMessage(Message message) {
