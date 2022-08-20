@@ -27,7 +27,7 @@ public class Consumer {
 
 			Topic topic = session.createTopic("demo-topic");
 
-			MessageConsumer consumer = session.createDurableSubscriber(topic, "Subscriber-1"); // DurableSubscriber omogucava da kada je Subscriber offline da kad se aktivira dobijemo poruku
+			MessageConsumer consumer = session.createDurableSubscriber(topic, "Subscriber-1"); // DurableSubscriber omogucava da kada Subscriber koji je bio offline, da kad se aktivira dobijemo poruku
 			consumer.setMessageListener(new MessageListener() {
 
 				public void onMessage(Message message) {
